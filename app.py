@@ -26,24 +26,24 @@ if not st.session_state.email:
     email = st.text_input("Email address")
 
     if st.button("Sign Up"):
-    if not email:
-        st.error("Please enter an email address")
-    else:
-        resp = requests.post(
-            f"{BASE_URL}/signup",
-            json={"email": email}
-        )
-
-        if resp.status_code == 200:
-            data = resp.json()
-
-            st.session_state.email = data.get("email")
-            st.session_state.is_active = data.get("is_active")
-
-            st.rerun()
-
+        if not email:
+            st.error("Please enter an email address")
         else:
-            st.error("Signup failed")
+            resp = requests.post(
+                f"{BASE_URL}/signup",
+                json={"email": email}
+            )
+    
+            if resp.status_code == 200:
+                data = resp.json()
+    
+                st.session_state.email = data.get("email")
+                st.session_state.is_active = data.get("is_active")
+    
+                st.rerun()
+    
+            else:
+                st.error("Signup failed")
 
 # ---------------- DASHBOARD ----------------
 else:
