@@ -36,7 +36,7 @@ if not st.session_state.email:
     
             if resp.status_code == 200:
                 data = resp.json()
-                print(resp)
+                print(data)
                 st.session_state.email = data.get("email")
                 st.session_state.is_active = data.get("is_active")
                 st.success("Sign-up Complete")
